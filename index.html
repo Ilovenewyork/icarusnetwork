@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icarus Network - Empowering Youth to Soar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'icarus-black': '#000000',
+                        'icarus-gold': '#FFD700',
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-icarus-black text-icarus-gold flex flex-col">
+    <header class="py-6 px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <i data-lucide="sun" class="h-10 w-10 mr-2"></i>
+                <span class="text-2xl font-bold">Icarus Network</span>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="#about" class="hover:text-white transition-colors">About</a></li>
+                    <li><a href="#mission" class="hover:text-white transition-colors">Mission</a></li>
+                    <li><a href="#apply" class="hover:text-white transition-colors">Apply</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl font-bold mb-6">Welcome to Icarus Network</h1>
+                <p class="text-xl mb-8">An impact-driven, project-oriented incubator empowering highly talented youth to make real change in the world.</p>
+                <div class="flex justify-center space-x-4">
+                    <i data-lucide="network" class="h-16 w-16"></i>
+                    <i data-lucide="rocket" class="h-16 w-16"></i>
+                    <i data-lucide="users" class="h-16 w-16"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="mission" class="py-20 px-4 sm:px-6 lg:px-8 bg-icarus-gold text-icarus-black">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold mb-6 text-center">Our Mission</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Empower Youth</h3>
+                        <p class="text-lg">We believe in the untapped potential of young minds. Icarus Network provides a platform for talented youth to transform their innovative ideas into impactful projects.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Foster Collaboration</h3>
+                        <p class="text-lg">By connecting like-minded individuals, we create a synergistic environment where ideas flourish and projects come to life through teamwork and shared passion.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Drive Real Change</h3>
+                        <p class="text-lg">Our focus is on projects that address real-world challenges. We support initiatives that have the potential to create lasting positive impact in communities and beyond.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Provide Resources</h3>
+                        <p class="text-lg">We offer mentorship, networking opportunities, and resources to help turn visionary ideas into tangible results, nurturing the next generation of changemakers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="apply" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-md mx-auto">
+                <h2 class="text-4xl font-bold mb-6 text-center">Join the Network</h2>
+                <p class="text-lg mb-6 text-center">Interested in being part of Icarus Network? Sign up to be notified when applications open!</p>
+                <form name="interest" method="POST" data-netlify="true" class="space-y-4">
+                    <input type="hidden" name="form-name" value="interest" />
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                        class="w-full px-4 py-2 rounded-full bg-white text-icarus-black"
+                    />
+                    <button type="submit" class="w-full bg-icarus-gold text-icarus-black font-bold py-3 px-6 rounded-full hover:bg-yellow-500 transition-colors flex items-center justify-center">
+                        <i data-lucide="send" class="h-5 w-5 mr-2"></i>
+                        Notify Me
+                    </button>
+                </form>
+                <div id="thankYouMessage" class="hidden text-center mt-4">
+                    <p class="text-xl font-bold mb-4">Thank you for your interest!</p>
+                    <p>We'll notify you when applications open.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-6 px-4 sm:px-6 lg:px-8 text-center">
+        <p>&copy; 2024 Icarus Network. All rights reserved.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        document.querySelector('form[name="interest"]').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(new FormData(this)).toString()
+            })
+            .then(() => {
+                document.querySelector('form[name="interest"]').style.display = 'none';
+                document.getElementById('thankYouMessage').classList.remove('hidden');
+            })
+            .catch((error) => alert('Oops! There was a problem submitting your form'));
+        });
+    </script>
+</body>
+</html>
